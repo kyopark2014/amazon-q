@@ -2,9 +2,11 @@
 
 ## Permission Setting
 
+
+#### Trusted entities
+
 Role의 Trust relationship에 "qbusiness.amazonaws.com" 추가합니다.
 
-Trusted entities
 
 ```java
 {
@@ -23,9 +25,63 @@ Trusted entities
 }
 ```
 
+### Permissions policies 
+
+태스트시에는 아래와 같은 permission을 추가합니다. 
+
+```java
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "VisualEditor0",
+			"Effect": "Allow",
+			"Action": [
+				"qbusiness:*"
+			],
+			"Resource": "*"
+		}
+	]
+}
+```
+
+상세한것은 [IAM role for Amazon Q data source connectors](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#iam-roles-ds)에 따라 아래와 같이 설정합니다.
+
+```java
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+            "Sid": "AllowsAmazonQToIngestDocuments",
+            "Effect": "Allow",
+            "Action": [
+                "qbusiness:BatchPutDocument",
+                "qbusiness:BatchDeleteDocument"
+            ],
+            "Resource": "arn:aws:qbusiness:{{region}}:{{source_account}}:application/{{application_id}}/index/{{index_id}}"
+        },
+        {
+            "Sid": "AllowsAmazonQToIngestPrincipalMapping",
+            "Effect": "Allow",
+            "Action": [
+                "qbusiness:PutGroup",
+                "qbusiness:CreateUser",
+                "qbusiness:DeleteGroup",
+                "qbusiness:UpdateUser",
+                "qbusiness:ListGroups"
+            ],
+            "Resource": [
+                "arn:aws:qbusiness:{{region}}:{{account_id}}:application/{{application_id}}",
+                "arn:aws:qbusiness:{{region}}:{{account_id}}:application/{{application_id}}/index/{{index_id}}",
+                "arn:aws:qbusiness:{{region}}:{{account_id}}:application/{{application_id}}/index/{{index_id}}/data-source/*"
+            ]
+        }
+    ]
+}
+```
+
 ## Sync 설정
 
-metadata prefix와 Include prefixes을 설정합니다. 여기서 Include prefixes는 bucket에 문서 파일의 경로이며, metadata prefix는 metadata 파일의 경로입니다.
+metadata prefix와 Include prefixes을 설정합니다. 여기서 Include prefixes는 bucket에 문서 )dp 파일의 경로이며, metadata prefix는 metadata 파일의 경로입니다.
 
 ![image](https://github.com/kyopark2014/amazon-q/assets/52392004/9a80475b-2cb8-4eee-a887-e736dc2bd455)
 
