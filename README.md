@@ -25,9 +25,11 @@ Trusted entities
 
 ## Sync 설정
 
+metadata prefix와 Include prefixes을 설정합니다. 여기서 Include prefixes는 bucket에 문서 파일의 경로이며, metadata prefix는 metadata 파일의 경로입니다.
+
 ![image](https://github.com/kyopark2014/amazon-q/assets/52392004/9a80475b-2cb8-4eee-a887-e736dc2bd455)
 
-## S3 동기화를 위한 metadata 예제
+여기서 S3 동기화를 위한 metadata 예제는 아래와 같습니다.
 
 ```java
 {
