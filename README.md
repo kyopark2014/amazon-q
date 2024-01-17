@@ -29,6 +29,9 @@ metadata prefix와 Include prefixes을 설정합니다. 여기서 Include prefix
 
 ![image](https://github.com/kyopark2014/amazon-q/assets/52392004/9a80475b-2cb8-4eee-a887-e736dc2bd455)
 
+
+Maximum file size는 기본이 50MB입니다. 이것은 Kendra Service Quota에서 [Storage capacity units](https://us-west-2.console.aws.amazon.com/servicequotas/home/services/kendra/quotas/L-E8A56FA5)에서 증설을 요청할 수 있습니다. 하지만 Kendra의 경우에 문서에서 추출되는 text의 크기가 5MB로 제한됩니다.
+
 여기서 S3 동기화를 위한 metadata 예제는 아래와 같습니다.
 
 ```java
